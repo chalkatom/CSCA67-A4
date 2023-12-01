@@ -1,0 +1,283 @@
+\documentclass{article}
+
+\usepackage{amsfonts,amssymb,amsthm,fancybox,amsmath,fullpage, setspace}
+\usepackage{times}
+ \usepackage{color}
+\usepackage{hyperref}
+\usepackage{MnSymbol,wasysym}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{multicol}
+
+\newcommand\Perms[2]{\tensor[^{#2}]P{_{#1}}}
+
+\setlength{\fboxsep}{1em}
+\setlength{
+\parindent}{0pt}
+\newif\ifsolutions
+\solutionstrue
+
+\newcommand{\notes}[1]{\ifnotes\grey{#1}\else \white{#1}\fi}
+\begin{document}
+\small
+\title{\Large Assignment 4 - Probability}
+\date{Due: Dec 4 by 11.59pm}
+\maketitle
+
+\noindent\textsl{ Submit your assignment by the due date to Gradescope. Recall that the rules of academic integrity for this class allow you to work with one other person.\\[1.0ex]
+ \textbf{You must list your partner on Gradescope and only one of you submits the assignment.}\\[1.0ex]
+You \textbf{may not use any other sources} such as the internet or other textbooks to find solutions to these questions. Your answers will be graded both on their final solution as well as the work you show to achieve that solution. \textbf{Note that a subset of the questions will be graded.}  By submitting your assignment you agree to abide by these rules.}\\
+
+\noindent\hrulefill\\
+
+\begin{enumerate}
+\item 
+\begin{enumerate}
+
+\item Suppose that 10 cookies are distributed among 5 distinct children, what is the probability that every student get at least one cookie?\\
+
+Let S represent the sample size,\\
+Let E represent the event that each child gets at least one cookie,\\\\
+For S: find out total number of ways to distribute 10 cookies to 5 children,\\
+10 cookies (objects)\\
+5 children (types)\\
+$C(10 + 5 - 1, 5-1)$\\
+$\therefore$ $S = C(14, 4)$\\
+
+For E: find out total number of ways to distribute 10 cookies to 5 children if each get at least one,\\
+10 cookies (objects)\\
+5 children (types)\\
+Let $1 \geq i \geq 5$ and $x_{i} \geq 1$, where $x_{i}$ represents the number of cookies child $i$ has.\\
+$x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 10$\\
+Get rid of the restriction for $x_{i}$ gives us:\\
+$x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 5$\\
+5 cookies (objects)\\
+5 children (types)\\
+$C(5 + 5 - 1, 5-1)$\\
+$\therefore$ $E = C(9, 4)$\\\\
+$P(E) = \frac{E}{S} = \frac{C(9, 4)}{C(14, 4)} = \frac{\frac{9!}{5!4!}}{\frac{14!}{10!4!}} \approx 0.13 = 13\%$
+
+\item If $n$ cookies are distributed among 32 distinct children, what is the probability in terms of $n$  that at least one student gets none? \\
+
+Let S represent the sample size,\\
+Let E represent the event that each child gets at least one cookie,\\\\
+For S: find out total number of ways to distribute n cookies to 32 children,\\
+n cookies (objects)\\
+32 children (types)\\
+$C(n + 32 - 1, n)$\\
+$\therefore$ $S = C(n + 31, n)$\\
+
+For E: find out total number of ways to distribute n cookies to 32 children if at least one student gets none,\\
+Since we can guarantee one child gets no cookies in every scenario, there are 32 choices for who that one child will be and we can count the rest normally as if we have 31 children.\\
+I.E., 32 $\cdot$ $ C(n + 31 - 1, n) = 32\cdot C(n + 30, n) =  E$\\\\
+$P(E) = \frac{E}{S} = \frac{32 \cdot C(n+30, n)}{C(n + 31, n)} = \frac{32 \cdot (n+30)!}{n!30!} \cdot \frac{31!n!}{(n+31)!} = \frac{32 \cdot 31}{n+1} $
+
+\end{enumerate}
+
+\item What is the probability of rolling a six-sided die six times and having all numbers from 1 through 6 appear once (in any order)?\\
+
+S = $6^6$\\
+E = 6!\\
+P(E) = $\frac{6!}{6^6} = \frac{720}{46,656} \approx 0.02 = 2\%$
+
+\item Suppose that $A$ and $B$ are events in a sample space $S$ and that $P(A)$, $P(B)$ and $P(A|B)$ are known. Show how to find a formula for $P(A|B^c)$.\\
+If $P(A \land B) = P(A \mid B) \cdot P(B)$ and $P(A \land B^c) = P(A \mid B^c) \cdot P(B^c)$,
+then:
+\begin {align}
+P(A) &=  P(A \mid B) P(B) +  P(A \mid B^c) P(B^c)\\
+P(A) - P(A\mid B)P(B) &= P(A \mid B^c)P(B^c)\\
+P(A) - P(A\mid B)P(B) &= P(A \mid B^c)(1 - P(B))\\
+\frac{P(A) - P(A \mid B)P(B)}{1 - P(B)} &= P(A \mid B^c)
+\end {align}
+\item A bag contains 25 red balls and 15 blue balls. Two are chosen at random one after the other, without replacement (ie, once you take the first one out, there are now 39 balls in the bag). 
+\begin{enumerate} 
+\item Determine each of the following probabilities:
+\begin{itemize}
+\item the probability that both balls are red\\
+
+Let $S_{1}$ represent original size of bag, $S_{1} = 40$\\
+Let $S_{2}$ represent size of bag after choosing a ball, $S_{2} = 39$\\
+Let $E_{1}$ represent number of red balls, $E_{1} = 25$\\
+Let $E_{2}$ represent number of red balls after choosing a red ball, $E_{2} = 24$\\
+\begin {align}
+P(E_{1} \land E_{2}) &= P(E_{1}) \cdot P(E_{2} \mid E_{1})\\
+&= \frac{E_{1}}{S_{1}} \cdot \frac{E_{2}}{S_{2}}\\
+&= \frac{25}{40} \cdot \frac{24}{39}\\
+&= \frac{5}{13} \approx 0.38 = 38\%
+\end {align}
+
+\item the probability that the first ball is red and second is not\\
+
+Let $S_{1}$ represent original size of bag, $S_{1} = 40$\\
+Let $S_{2}$ represent size of bag after choosing a ball, $S_{2} = 39$\\
+Let $E_{1}$ represent number of red balls, $E_{1} = 25$\\
+Let $E_{2}$ represent number of blue balls after choosing a red ball, $E_{2} = 15$\\
+\begin {align}
+P(E_{1} \land E_{2}) &= P(E_{1}) \cdot P(E_{2} \mid E_{1})\\
+&= \frac{E_{1}}{S_{1}} \cdot \frac{E_{2}}{S_{2}}\\
+&= \frac{25}{40} \cdot \frac{15}{39}\\
+&= \frac{25}{104} \approx 0.24 = 24\%
+\end {align}
+\item the probability that the first ball is not red and the second is red.\\
+
+Let $S_{1}$ represent original size of bag, $S_{1} = 40$\\
+Let $S_{2}$ represent size of bag after choosing a ball, $S_{2} = 39$\\
+Let $E_{1}$ represent number of blue balls, $E_{1} = 15$\\
+Let $E_{2}$ represent number of red balls after choosing a blue ball, $E_{2} = 25$\\
+\begin {align}
+P(E_{1} \land E_{2}) &= P(E_{1}) \cdot P(E_{2} \mid E_{1})\\
+&= \frac{E_{1}}{S_{1}} \cdot \frac{E_{2}}{S_{2}}\\
+&= \frac{15}{40} \cdot \frac{25}{39}\\
+&= \frac{25}{104} \approx 0.24 = 24\%
+\end {align}
+\item the probability that neither ball is red\\
+
+Let $S_{1}$ represent original size of bag, $S_{1} = 40$\\
+Let $S_{2}$ represent size of bag after choosing a ball, $S_{2} = 39$\\
+Let $E_{1}$ represent number of blue balls, $E_{1} = 15$\\
+Let $E_{2}$ represent number of blue balls after choosing a blue ball, $E_{2} = 14$\\
+\begin {align}
+P(E_{1} \land E_{2}) &= P(E_{1}) \cdot P(E_{2} \mid E_{1})\\
+&= \frac{E_{1}}{S_{1}} \cdot \frac{E_{2}}{S_{2}}\\
+&= \frac{15}{40} \cdot \frac{44}{39}\\
+&= \frac{7}{52} \approx 0.13 = 13\%
+\end {align}
+\end{itemize}
+
+\item What is the probability that the second  ball is red?\\
+
+Let $R_{1}$ represent that the first ball is red.\\
+Let $R_{2}$ represent that the second ball is red.\\
+Let $B_{1}$ represent that the first ball is blue.\\
+Let $B_{2}$ represent that the second ball is blue.\\
+
+\begin {align}
+P(R_{2}) &= P((R_{1} \land R_{2}) \lor (B_{1} \land R_{2}))\\
+&= P(R_{1} \land R_{2}) + P(B_{1} \land R_{2}) - P((R_{1} \land R_{2}) \land (B_{1} \land R_{2}))\\
+&\approx 0.38 + 0.24 - 0 &found\;in\;part\;a)\\
+&= 0.62 = 62\%
+\end {align}
+
+\item  What is the probability that at least one ball is red?\\
+
+Find probability of both balls being blue, and subtract from 1 (total probability)\\\\
+Let $B_{1}$ represent that the first ball is blue.\\
+Let $B_{2}$ represent that the second ball is blue.\\
+Let $R$ represent that at least one ball is red.\\
+
+\begin {align}
+P(R) &= 1 - P(B_{1} \land B_{2})\\
+&\approx 1 - 0.13&found\;in\;part\;a)\\
+&= 0.87 = 87\%
+\end {align}
+\item What is the probability that exactly one ball is red? \\
+
+Let $R$ represent that exactly one ball is red.\\
+Let $R_{1}$ represent that the first ball is red.\\
+Let $R_{2}$ represent that the second ball is red.\\
+Let $B_{1}$ represent that the first ball is blue.\\
+Let $B_{2}$ represent that the second ball is blue.\\
+
+\begin {align}
+P(R) &= P((R_{1} \land B_{2}) \lor (B_{1} \land R_{2}))\\
+&= P(R_{1} \land B_{2}) + P(B_{1} \land R_{2}) - P((R_{1} \land B_{2}) \land (B_{1} \land R_{2}))\\
+& \approx 0.24 + 0.24 - 0&found\;in\;part\;a)\\
+&= 0.48 = 48\%
+\end {align}
+
+
+\end{enumerate}
+
+\item In a lottery game, there is a bag of 15 numbered balls (from 1 to 15). You select 5 balls without replacement. You win if no two balls are consecutive numbers. For example, if the balls are numbered 1, 4, 6, 9, 15 you would win but if they were numbered 3, 7, 8, 10, 12 you would loose.  What is the probability that you win the game? 
+
+
+\item In order to work for a public transit company,  drivers need to be drug free before starting their shifts. Assume that the percentage of drivers who actually use drugs is  $4\%$,  the same as the general population. The transit company randomly screens drivers before their shifts start. The drug-screening test has a false positive rate of $3\%$ and a false negative rate of $2\%$. This means that a driver who uses drugs tests positive for them $98\%$ of the time and a driver who does not use drugs tests negative for them $97\%$ of the time. 
+
+\begin{enumerate}
+\item  What is the probability that  a randomly chosen driver who tests positive for drugs actually uses drugs?\\
+
+Let $D$ represent the event that the driver is a drug user.\\
+Let $T$ represent the event that the driver tests positive.\\
+$\therefore P(D) = 0.04$ \\
+$P(D^c) = 0.96$\\
+$P(T \mid D) = 0.98$\\
+We want to find $P(D \mid T)$:\\
+\begin {align}
+P(D \mid T) &= \frac{P(T \mid D)P(D)}{P(T)}\\
+&= \frac{P(T\mid D)P(D)}{P(T\mid D)P(D) + P(T \mid D^c)P(D^c)}
+\end {align}
+$P(T \mid D^c)$ is asking for the probability of a positive test given that the driver does not use drugs. We know that a driver who does not use drugs tests negative for them 97\% of the time.\\
+$\therefore$ the probability of a driver testing positive for drugs if they do not use drugs is $1 - 0.97 = 0.03 = P(T \mid D^c)$\\
+\begin {align}
+&= \frac{0.98 \cdot 0.04}{(0.98 \cdot 0.04) + (0.03 \cdot 0.96)}\\
+&= \frac{0.0392}{0.068}\\
+&\approx 0.58 = 58\%
+\end {align}
+
+\item What is the probability that a randomly chosen driver who tests negative for drugs does not use drugs? \\
+
+Let $D$ represent the event that the driver is a drug user.\\
+Let $N$ represent the event that the driver tests negative.\\
+$\therefore P(D) = 0.04$ \\
+$P(D^c) = 0.96$\\
+$P(N \mid D^c) = 0.97$\\
+We want to find $P(D^c \mid N)$:
+\begin {align}
+P(D^c \mid N) &= \frac{P(N \mid D^c)P(D^c)}{P(N)}\\
+&= \frac{P(N \mid D^c)P(D^c)}{P(N\mid D^c)P(D^c) + P(N \mid D)P(D)}
+\end {align}
+$P(N \mid D)$ is asking for the probability of a negative test given that the driver does use drugs. We know that a driver who does use drugs tests positive for them 98\% of the time.\\
+$\therefore$ the probability of a driver testing negative for drugs if they do use drugs is $1 - 0.98 = 0.02 = P(N \mid D)$\\
+\begin {align}
+&= \frac{0.97 \cdot 0.96}{(0.97 \cdot 0.96) + (0.02 \cdot 0.04)}\\
+&= \frac{0.9312}{0.932}\\
+&\approx 0.999 = 99.9\%
+\end {align}
+\end{enumerate}
+
+\item A team of computer science students are working on a large programming project. Two students $A$ and $B$ are selected to do quality assurance and check the application for bugs. Assume that $A$ and $B$ work independently and that $A$ misses 12\% of the bugs and $B$ misses 15\% of the bugs.  
+\begin{enumerate}
+\item What is the probability that a randomly chosen bug will be missed by both quality assurance checkers?\\
+
+Let A represent student A misses a bug.\\
+Let B represent student B misses a bug.\\
+$P(A) = 0.12$\\
+$P(B) = 0.15$\\
+Want: $P(A \land B)$, since A and B are independent events, $P(A \land  B) = P(A) \cdot P(B)$\\
+\begin {align}
+P(A \land B) &= P(A) \cdot P(B)\\
+&= 0.12 \cdot 0.15\\
+&= 0.018 = 1.8\%
+\end {align}
+
+\item If the program contains 1000 bugs, how many bugs can be expected to be missed?\\
+
+Since there is a 1.8\% chance to miss a bug, then we can expect (1000 $\cdot$ 0.018) bugs to be missed.\\
+$1000 \cdot 0.018 = 18$\\
+$\therefore$ we can expect 18 bugs to be missed.
+
+\end{enumerate}
+
+
+\item In a lottery game, a player pays \$2 to play and gets to roll five fair dice.  The player wins 
+\begin{itemize}
+\item \$0 for a roll where all five die display different values
+\item \$1 for a roll containing two of the same value
+\item \$2 for a roll containing three of the same value
+\item \$4 for a roll containing four of the same value
+\item \$8 for a roll containing five of the same value
+\end{itemize}
+\begin{enumerate}
+\item What is the expected winnings on average for the player each time the game is played?
+
+\item  If 10,000 people play the game each day, how much money will the lottery commission make in one (365 day) year from this game? 
+
+\item How big a payoff could the lottery commission pay for five of a kind and still make money (ie, instead of \$8 for five of a kind, how much could they pay out to the a winner)? 
+\end{enumerate}
+
+\item \textbf{Challenge for fun (not graded).} Describe a sample space and events $A, B$ and $C$ where $P(A\cap B\cap C) = P(A)\cdot P(B) \cdot P(C)$ but $A$, $B$ and $C$ are not pairwise independent.  Your solution should not be the trivial one so none of $P(A), P(B)$ or $P(C)$ should be 0. 
+
+
+\end{enumerate}
+
+\end{document}
